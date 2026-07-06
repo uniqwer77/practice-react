@@ -1,0 +1,30 @@
+.burger{
+    width:60px;
+    height:60px;
+    background:white;
+    border:1px solid #d1d5db;
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:6px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.burger:hover{
+    background:#2563eb;
+}
+
+.burger span{
+    width:26px;
+    height:3px;
+    background:#374151;
+    border-radius:3px;
+    transition:.3s;
+}
+
+.burger:hover span{
+    background:white;
+}

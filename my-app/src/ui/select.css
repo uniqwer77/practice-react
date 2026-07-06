@@ -1,0 +1,35 @@
+select{
+    width:100%;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:12px 15px;
+    margin-bottom:15px;
+    outline:none;
+    transition:.3s;
+    font-size:14px;
+}
+
+select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+.tags-select{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.tags-select span{
+    background:#eef2ff;
+    color:#2563eb;
+    padding:7px 12px;
+    border-radius:8px;
+    font-size:14px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.tags-select span:hover{
+    background:#dbeafe;
+}

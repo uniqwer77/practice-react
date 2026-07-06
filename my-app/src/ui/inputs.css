@@ -1,0 +1,38 @@
+input,
+textarea{
+    width:100%;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:12px 15px;
+    margin-bottom:15px;
+    outline:none;
+    transition:.3s;
+    font-size:14px;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}
+
+.input-icon{
+    position:relative;
+}
+
+.input-icon img{
+    position:absolute;
+    left:15px;
+    top:36%;
+    transform:translateY(-50%);
+    color:#9ca3af;
+}
+
+.input-icon input{
+    padding-left:42px;
+}

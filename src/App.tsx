@@ -1,24 +1,24 @@
-import React from 'react';
-import Buttons from './ui/buttons';
-import Inputs from './ui/inputs';
-import Select from './ui/select';
-import Checkbox from './ui/checkbox';
-import Search from './ui/search';
-import Pagination from './ui/pagination';
-import Burger from './ui/burger';
+import { Routes, Route } from 'react-router-dom';
+import Login from './components/Login';
+import Register from './components/Register';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import AppHeader from './components/appHeader/appHeader';
 
-function App() {
+export default function App() {
   return (
-    <>
-      <Buttons />
-      <Inputs />
-      <Select /> 
-      <Checkbox />
-      <Search />
-      <Pagination />
-      <Burger />
-    </>
-  )
-}
+    <div className="app">
+      <AppHeader/>
+      <main>
+        <Routes>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/register" element={<Register/>}/>
+          <Route path="/" />
 
-export default App
+          <Route element={<ProtectedRoute/>}>
+            <Route path="/create" />
+          </Route>
+        </Routes>
+      </main>
+    </div>
+  );
+}

@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
-import Login from './components/Login/Login';
-import Register from './components/Register/Register';
+import Login from './components/pages/Login/Login';
+import Register from './components/pages/Register/Register';
 import { ProtectedRoute } from './components/ProtectedRoute';
 import AppHeader from './components/appHeader/appHeader';
 

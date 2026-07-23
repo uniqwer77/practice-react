@@ -2,7 +2,10 @@ import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate, Link } from 'react-router-dom';
-import { registerUser } from '../services/authService';
+import { registerUser } from '../../services/authService';
+import { Button } from '../ui/Button/Button';
+import { Input } from '../ui/Input/Input';
+import styles from './Register.module.css';
 
 const schema = yup.object().shape({
     username: yup.string().min(3, 'Имя от 3 символов').required('Имя обязательно'),
@@ -26,7 +29,6 @@ export default function Register() {
     const onSubmit = async (data: FormData) => {
         try {
             await registerUser(data.username, data.email, data.password);
-            alert('Успешная регистрация!');
             navigate('/login');
         } catch (error: any) {
             alert(error.message);
@@ -34,29 +36,20 @@ export default function Register() {
     };
 
     return (
-        <div>
-            <h1>Регистрация</h1>
+        <div className={styles.card}>
+            <h1 className={styles.title}>Регистрация</h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <div>
-                    <input placeholder="Имя пользователя" {...register('username')} />
-                    <p>{errors.username?.message}</p>
-                </div>
+                <Input placeholder="Имя пользователя" error={errors.username?.message} {...register('username')}/>
+                <Input placeholder="Email" error={errors.email?.message} {...register('email')}/>
+                <Input type="password" placeholder="Пароль" error={errors.password?.message} {...register('password')}/>
 
-                <div>
-                    <input placeholder="Email" {...register('email')} />
-                    <p>{errors.email?.message}</p>
-                </div>
-
-                <div>
-                    <input type="password" placeholder="Пароль" {...register('password')} />
-                    <p>{errors.password?.message}</p>
-                </div>
-
-                <button type="submit" disabled={isSubmitting}>
+                <Button type="submit" disabled={isSubmitting}>
                     {isSubmitting ? 'Загрузка...' : 'Зарегистрироваться'}
-                </button>
+                </Button>
             </form>
-            <p>Уже есть аккаунт? <Link to="/login">Войти</Link></p>
+            <p className={styles.text}>Уже есть аккаунт? 
+                <Link to="/login"  className={styles.link}>Войти</Link>
+            </p>
         </div>
     );
 }

@@ -15,45 +15,10 @@ const AppHeader = () => {
     const getLinkClass = ({ isActive }: { isActive: boolean }) =>
         isActive ? `${styles.link} ${styles.active}` : styles.link;
 
-    // return (
-    //     <header>
-    //         <nav>
-    //             <NavLink end className={getLinkClass} to="/">
-    //                 Посты
-    //             </NavLink>
-
-    //             <NavLink end className={getLinkClass} to="/create">
-    //                 Создать пост
-    //             </NavLink>
-    //         </nav>
-
-    //         <div className="auth-block">
-    //             {isAuth ? (
-    //                 <>
-    //                     <span>Привет, {user?.username}!</span>
-    //                     <button onClick={handleLogout} className="logout-btn">
-    //                         Выйти
-    //                     </button>
-    //                 </>
-    //             ) : (
-    //                 <nav className={styles.authNav}>
-    //                     <NavLink className={getLinkClass} to="/login">
-    //                         Войти
-    //                     </NavLink>
-                    
-    //                     <NavLink className={getLinkClass} to="/register">
-    //                         Регистрация
-    //                     </NavLink>
-    //                 </nav>
-    //             )}
-    //         </div>
-    //     </header>
-    // );
-
     return (
         <header className={styles.header}>
         <div className={styles.container}>
-            {/* Основное меню */}
+
             <nav className={styles.nav}>
             <NavLink end className={getLinkClass} to="/">
                 Посты
@@ -63,7 +28,6 @@ const AppHeader = () => {
             </NavLink>
             </nav>
 
-            {/* Блок авторизации */}
             <div className={styles.authBlock}>
             {isAuth ? (
                 <div className={styles.userInfo}>

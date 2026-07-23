@@ -1,0 +1,10 @@
+.center {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.center a {
+  color: #0066ff;
+  text-decoration: none;
+  font-weight: 600;
+}

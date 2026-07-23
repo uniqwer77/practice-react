@@ -7,6 +7,19 @@
 
 body{
     background:#f7f9fc;
-    padding:40px;
     color:#1f2937;
+}
+
+#root, .app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }

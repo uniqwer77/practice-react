@@ -1,5 +1,5 @@
 import {NavLink, useNavigate } from 'react-router-dom';
-// import './appHeader.css';
+import styles from './AppHeader.module.css';
 import {isAuthenticated, getCurrentUser, logoutUser} from '../../services/authService';
 
 const AppHeader = () => {
@@ -12,45 +12,78 @@ const AppHeader = () => {
         navigate('/login');
     };
 
-    return (
-        <header>
-            <nav>
-                <h4>
-                    <NavLink end style={({isActive}) => ({color: isActive ? '#9f0013' : 'inherit'})} to="/">
-                        Посты
-                    </NavLink>
-                </h4>
+    const getLinkClass = ({ isActive }: { isActive: boolean }) =>
+        isActive ? `${styles.link} ${styles.active}` : styles.link;
 
-                <h4>
-                    <NavLink end style={({isActive}) => ({color: isActive ? '#9f0013' : 'inherit'})}to="/create">
-                        Создать пост
-                    </NavLink>
-                </h4>
+    // return (
+    //     <header>
+    //         <nav>
+    //             <NavLink end className={getLinkClass} to="/">
+    //                 Посты
+    //             </NavLink>
+
+    //             <NavLink end className={getLinkClass} to="/create">
+    //                 Создать пост
+    //             </NavLink>
+    //         </nav>
+
+    //         <div className="auth-block">
+    //             {isAuth ? (
+    //                 <>
+    //                     <span>Привет, {user?.username}!</span>
+    //                     <button onClick={handleLogout} className="logout-btn">
+    //                         Выйти
+    //                     </button>
+    //                 </>
+    //             ) : (
+    //                 <nav className={styles.authNav}>
+    //                     <NavLink className={getLinkClass} to="/login">
+    //                         Войти
+    //                     </NavLink>
+                    
+    //                     <NavLink className={getLinkClass} to="/register">
+    //                         Регистрация
+    //                     </NavLink>
+    //                 </nav>
+    //             )}
+    //         </div>
+    //     </header>
+    // );
+
+    return (
+        <header className={styles.header}>
+        <div className={styles.container}>
+            {/* Основное меню */}
+            <nav className={styles.nav}>
+            <NavLink end className={getLinkClass} to="/">
+                Посты
+            </NavLink>
+            <NavLink end className={getLinkClass} to="/create">
+                Создать пост
+            </NavLink>
             </nav>
 
-            <div className="auth-block">
-                {isAuth ? (
-                    <>
-                        <span>Привет, {user?.username}!</span>
-                        <button onClick={handleLogout} className="logout-btn">
-                            Выйти
-                        </button>
-                    </>
-                ) : (
-                    <>
-                        <h4>
-                            <NavLink style={({isActive}) => ({color: isActive ? '#9f0013' : 'inherit'})} to="/login">
-                                Войти
-                            </NavLink>
-                        </h4>
-                        <h4>
-                            <NavLink style={({isActive}) => ({color: isActive ? '#9f0013' : 'inherit'})} to="/register">
-                                Регистрация
-                            </NavLink>
-                        </h4>
-                    </>
-                )}
+            {/* Блок авторизации */}
+            <div className={styles.authBlock}>
+            {isAuth ? (
+                <div className={styles.userInfo}>
+                <span className={styles.username}>Привет, {user?.username}!</span>
+                <button onClick={handleLogout} className={styles.logoutBtn}>
+                    Выйти
+                </button>
+                </div>
+            ) : (
+                <nav className={styles.authNav}>
+                <NavLink className={getLinkClass} to="/login">
+                    Войти
+                </NavLink>
+                <NavLink className={getLinkClass} to="/register">
+                    Регистрация
+                </NavLink>
+                </nav>
+            )}
             </div>
+        </div>
         </header>
     );
 }

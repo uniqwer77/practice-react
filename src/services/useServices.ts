@@ -13,6 +13,8 @@ interface PaginatedResponse<T> {
   data: T[];
 }
 
+export type NewPostData = Omit<Post, 'id'>;
+
 const useServices = () => {
     const {loading, request, error, clearError} = useHttp();
 
@@ -36,7 +38,18 @@ const useServices = () => {
         return newPost;
     }
 
-    return {loading, getAllPosts, getPost, error, clearError};
+    const postPost = async (newPost: NewPostData): Promise<Post> => {
+        const createdPost = await request<Post>(
+            _apiBase,
+            'POST',
+            { 'Content-Type': 'application/json' },
+            JSON.stringify(newPost)
+        );
+        
+        return createdPost;
+    }
+
+    return {loading, getAllPosts, getPost, error, clearError, postPost};
 }
 
 export default useServices;

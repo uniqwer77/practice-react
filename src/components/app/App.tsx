@@ -5,6 +5,7 @@ import Register from '../pages/Register/Register';
 import { ProtectedRoute } from '../ProtectedRoute';
 import AppHeader from '../AppHeader/AppHeader';
 import PostList from '../PostList/PostList';
+import CreatePost from '../CreatePost/CreatePost';
 import type { Post } from '../../services/useServices';
 import { PostsContext } from "../context/PostsContext";
 
@@ -22,7 +23,7 @@ export default function App() {
             <Route path="/" element={<PostList/>}/>
 
             <Route element={<ProtectedRoute/>}>
-              <Route path="/create" />
+              <Route path="/create" element={<CreatePost/>}/>
             </Route>
           </Routes>
         </main>

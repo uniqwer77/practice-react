@@ -1,0 +1,26 @@
+.wrapper {
+  display: flex;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+textarea{
+    width:100%;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    padding:12px 15px;
+    margin-bottom:15px;
+    outline:none;
+    transition:.3s;
+    font-size:14px;
+}
+
+textarea:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+
+textarea{
+    height:120px;
+    resize:none;
+}

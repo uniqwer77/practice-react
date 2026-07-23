@@ -1,0 +1,26 @@
+.form {
+  margin: 0 auto;
+  width: 800px;
+  background-color: #ffffff;
+  padding: 32px 28px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+  box-sizing: border-box;
+  margin-top: 100px;
+}
+
+button {
+  padding: 14px;
+  background: #0066ff;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #004fcc;
+}

@@ -9,38 +9,39 @@ export interface Post {
   comments?: any[];
 }
 
+export interface Comment {
+    id: string;
+    postId: number | string,
+    author: string;
+    email: string;
+    body: string;
+}
+
 interface PaginatedResponse<T> {
   data: T[];
 }
 
 export type NewPostData = Omit<Post, 'id'>;
+export type NewCommentData = Omit<Comment, 'id'>;
 
 const useServices = () => {
     const {loading, request, error, clearError} = useHttp();
 
-    const _apiBase = 'http://localhost:3001/posts';
+    const _apiBase = 'http://localhost:3001';
     const _basePage = 1;
 
     const getAllPosts = async (page: number = _basePage): Promise<Post[]> => {
-        const res = await request<PaginatedResponse<Post>>(`${_apiBase}?_page=${page}&_per_page=3`);
+        const res = await request<PaginatedResponse<Post>>(`${_apiBase}/posts?_page=${page}&_per_page=3`);
         return res.data;
-        // return res.data.map(_transformPost);
     }
 
     const getPost = async (id: number | string): Promise<Post> => {
-        const res = await request<Post>(`${_apiBase}/${id}`);
-        return _transformPost(res);
-    }
-
-    const _transformPost = (post: Post): Post => {
-        const newPost = { ...post };
-        // newPost.comments = getCommentsList();
-        return newPost;
+        return await request<Post>(`${_apiBase}/posts/${id}?_embed=comments`);
     }
 
     const postPost = async (newPost: NewPostData): Promise<Post> => {
         const createdPost = await request<Post>(
-            _apiBase,
+            `${_apiBase}/posts`,
             'POST',
             { 'Content-Type': 'application/json' },
             JSON.stringify(newPost)
@@ -49,7 +50,18 @@ const useServices = () => {
         return createdPost;
     }
 
-    return {loading, getAllPosts, getPost, error, clearError, postPost};
+    const postComment = async (newComment: NewCommentData): Promise<Comment> => {
+        const createdComment = await request<Comment>(
+            `${_apiBase}/comments`,
+            'POST',
+            { 'Content-Type': 'application/json' },
+            JSON.stringify(newComment)
+        );
+        
+        return createdComment; 
+    }
+
+    return {loading, getAllPosts, getPost, error, clearError, postPost, postComment};
 }
 
 export default useServices;

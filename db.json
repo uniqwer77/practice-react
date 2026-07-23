@@ -139,6 +139,70 @@
       "title": "Новый пост",
       "body": "Новый пост",
       "id": "QWZuOGs49ZI"
+    },
+    {
+      "userId": null,
+      "title": "Пост",
+      "body": "аа",
+      "id": "I8pB_Or3e6w"
+    }
+  ],
+  "comments": [
+    {
+      "id": "1",
+      "postId": "1",
+      "author": "Sam",
+      "email": "Wer@gmail.com",
+      "body": "Go go"
+    },
+    {
+      "id": "2",
+      "postId": "1",
+      "author": "Ann",
+      "email": "Waxt@gmail.com",
+      "body": "thanks"
+    },
+    {
+      "id": "3",
+      "postId": "1",
+      "author": "Tom",
+      "email": "Pofr@gmail.com",
+      "body": "love"
+    },
+    {
+      "id": "4",
+      "postId": "2",
+      "author": "Ron",
+      "email": "kortec@gmail.com",
+      "body": "SDFkm dmkls osdkp,f"
+    },
+    {
+      "postId": "1",
+      "author": "1",
+      "email": "1",
+      "body": "1",
+      "id": "0pUpusdOXNU"
+    },
+    {
+      "postId": "1",
+      "author": "1",
+      "email": "1",
+      "body": "1",
+      "id": "QP_lST3p1bo"
+    },
+    {
+      "postId": "1",
+      "author": "2",
+      "email": "2",
+      "body": "2",
+      "id": "tO6IufTIiXs"
+    },
+    {
+      "postId": "1",
+      "author": "3",
+      "email": "3",
+      "body": "3",
+      "id": "turF-tHJruI"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

@@ -52,6 +52,18 @@
 
 ## Запуск проекта
 
+### Склонируйте проект
+
+```bash
+git clone https://github.com/uniqwer77/practice-react.git
+```
+
+### Перейдите в новую папку
+
+```bash
+cd practice-react
+```
+
 ### Установка зависимостей:
 
 ```bash

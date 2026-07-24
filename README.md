@@ -1,75 +1,105 @@
-# React + TypeScript + Vite
+# Веб-приложение для создания и управления постами
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Современное веб-приложение для публикации и просмотра постов с собственным механизмом регистрации и авторизации пользователей.
 
-Currently, two official plugins are available:
+Пользователи могут просматривать общедоступную ленту публикаций, открывать подробную информацию о постах, оставлять комментарии, а после авторизации — создавать собственные записи и управлять сессией.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Возможности проекта
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Для неавторизованного пользователя:
+* Просмотр списка всех постов в ленте;
+* Просмотр подробной страницы отдельного поста;
+* Просмотр комментариев к публикациям;
+* Переход на страницы входа и регистрации.
 
-## Expanding the ESLint configuration
+### Для авторизованного пользователя:
+* Регистрация нового аккаунта;
+* Вход в систему с проверкой учетных данных;
+* Автоматическое сохранение сессии при перезагрузке страницы;
+* Создание новых постов;
+* Оставление комментариев к постам;
+* Выход из аккаунта (Logout).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Авторизация и безопасность
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+В проекте реализована **клиентская mock-авторизация** на основе JWT-подобных токенов.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Особенности реализации:
+- **Регистрация:** добавление пользователей через `json-server API` с предварительной проверкой уникальности `email`.
+- **Вход:** валидация комбинации `email` и пароля.
+- **Генерация токена:** формирование структуры `header.payload.signature` на стороне клиента.
+- **Хранение:** безопасное сохранение токена в `localStorage`.
+- **Декодирование:** извлечение данных пользователя непосредственно из `payload` токена.
+- **Срок жизни:** проверка времени жизни токена (`exp`) и автоматический сброс сессии по истечении срока.
+- **Защита роутов:** ограничение доступа к приватным страницам с помощью компонента `<ProtectedRoute />`.
 
+## Технологии
+
+* Frontend
+* React 19
+* TypeScript
+* Vite
+* React Router
+* Redux Toolkit
+* React Redux
+* CSS Modules
+* React Hooks
+* State Management
+
+## Запуск проекта
+
+### Установка зависимостей:
+
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Запуск:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+npm run dev
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### После запуска автоматически поднимаются:
 
+* React + Vite;
+* json-server API.
+
+## Если порт 3001 занят
+
+### Шаг 1. Изменить package.json
+
+Найти строку:
+```json
+"dev": "concurrently \"vite\" \"json-server --watch db.json --port 3001\""
+```
+
+Изменить, например, на:
+
+```json
+"dev": "concurrently \"vite\" \"json-server --watch db.json --port 3002\""
+```
+
+### Шаг 2. Изменить vite.config.ts
+
+Найти:
+
+```json
+target: "http://localhost:3001"
+```
+
+Изменить:
+
+```json
+target: "http://localhost:3002"
+```
+
+### После изменения перезапустить проект:
+
+```bash
+npm run dev
 ```

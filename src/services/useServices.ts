@@ -1,9 +1,8 @@
 import {useHttp} from '../components/hooks/http.hook';
-// import getCommentsList from '../services/commentList';
 
 export interface Post {
-  userId: number;
-  id: number;
+  userId: number | string;
+  id: number | string;
   title: string;
   body: string;
   comments?: any[];

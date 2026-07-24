@@ -36,24 +36,6 @@
     max-width: 600px;
 }
 
-.commentForm input,
-.commentForm textarea {
-    width: 95%;
-    padding: 12px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    font-size: 15px;
-    resize: none;
-    transition: 0.2s;
-}
-
-.commentForm input:focus,
-.commentForm textarea:focus {
-    outline: none;
-    border-color: #4c8bff;
-    box-shadow: 0 0 0 3px #4c8bff33;
-}
-
 .commentForm button {
     align-self: flex-start;
     padding: 12px 22px;

@@ -1,15 +1,21 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useContext, type SubmitEvent } from 'react';
-import { PostsContext } from "../context/PostsContext";
+import { useState, type SubmitEvent } from 'react';
 import { getCurrentUser } from '../../services/authService';
-import useServices, { type Post } from '../../services/useServices';
+import useServices from '../../services/useServices';
 import { Input } from '../ui/Input/Input';
 import { Textarea } from '../ui/Textarea/Textarea';
+
+import { useAppDispatch } from "../../store/hook";
+
+import {
+    addPost,
+} from "../../features/posts/PostSlice";
 
 import styles from './CreatePost.module.css';
 
 const CreatePost = () => {
-    const { setPostsList } = useContext(PostsContext);
+    const dispatch = useAppDispatch();
+
     const [title, setTitle] = useState<string>('');
     const [body, setBody] = useState<string>('');
 
@@ -25,14 +31,14 @@ const CreatePost = () => {
         e.preventDefault();
 
         const newPost = {
-            userId: Number(user.id),
+            userId: String(user.id),
             title,
             body
         }
 
         postPost(newPost)
             .then((createdPost) => {
-                setPostsList((prev: Post[]) => [...prev, createdPost]);
+                dispatch(addPost(createdPost));
                 setTitle('');
                 setBody('');
                 navigate('/');

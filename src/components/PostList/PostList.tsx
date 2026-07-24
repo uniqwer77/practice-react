@@ -1,23 +1,40 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import {Link} from 'react-router-dom';
-import { PostsContext } from "../context/PostsContext";
 import useServices, { type Post } from '../../services/useServices';
 import Error from '../404/404';
 import Spinner from '../Spinner/Spinner';
 
+import { useAppDispatch, useAppSelector } from "../../store/hook";
+
+import {
+    addPosts,
+    setPostsEnded,
+    setPage,
+} from "../../features/posts/PostSlice";
+
 import styles from './PostList.module.css';
 
 const PostList = () => {
+    const dispatch = useAppDispatch();
 
-    const { postsList, setPostsList } = useContext(PostsContext);
+    const postsList = useAppSelector(
+        (state) => state.posts.posts
+    );
+
+    const postsEnded = useAppSelector(
+        (state) => state.posts.postsEnded
+    );
+
+    const page = useAppSelector(
+        (state) => state.posts.page
+    );
+
     const [newItemLoading, setNewItemLoading] = useState<boolean>(false);
-    const [page, setPage] = useState<number>(Math.floor(postsList.length / 3) + 1);
-    const [postsEnded, setPostsEnded] = useState<boolean>(false);
 
     const {getAllPosts, error, loading} = useServices();
 
     useEffect(() => {
-        if (postsList.length === 0) {
+        if (!loading && postsList.length === 0) {
             onRequest(1);
         }
     }, []);
@@ -35,15 +52,13 @@ const PostList = () => {
             ended = true;
         }
 
-        setPostsList((prevPosts: Post[]) => {
-            const uniquePosts = newPostsList.filter(
-                (newPost) => !prevPosts.some((item) => item.id === newPost.id)
-            );
-            return [...prevPosts, ...uniquePosts];
-        });
+        const uniquePosts = newPostsList.filter(
+            (newPost) => !postsList.some((item) => item.id === newPost.id)
+        );
+        dispatch(addPosts(uniquePosts));
         setNewItemLoading(false);
-        setPage(prevPage => prevPage + 1);
-        setPostsEnded(ended);
+        dispatch(setPage(page + 1));
+        dispatch(setPostsEnded(ended));
     }
 
     const renderPosts = (arr: Post[]) => {

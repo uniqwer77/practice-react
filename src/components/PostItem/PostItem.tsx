@@ -2,9 +2,10 @@ import { useState, useEffect, type SubmitEvent, type ReactNode } from "react";
 import { useParams } from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import useServices, { type Post, type Comment } from '../../services/useServices';
-import {isAuthenticated} from '../../services/authService';
+import {isAuthenticated, getCurrentUser} from '../../services/authService';
 import CommentItem from "../CommentItem/CommentItem";
 import Error from "../404/404";
+import { Textarea } from '../ui/Textarea/Textarea';
 
 import styles from './PostItem.module.css';
 
@@ -13,10 +14,7 @@ const PostItem = () => {
     const postId = id;
 
     const [post, setPost] = useState<Post | null>(null);
-    
-    const [author, setAuthor] = useState<string>('');
     const [body, setBody] = useState<string>('');
-    const [email, setEmail] = useState<string>(''); 
 
     const { getPost, postComment } = useServices();
 
@@ -42,12 +40,15 @@ const PostItem = () => {
 
     const onSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const user = getCurrentUser();
+
+        if (!user) return;
         if (!postId) return;
 
         const newComment = {
             postId: String(postId),
-            author,
-            email,
+            author: user.username,
+            email: user.email,
             body
         }
 
@@ -58,8 +59,6 @@ const PostItem = () => {
                     comments: prev.comments ? [...prev.comments, savedComment] : [savedComment]
                 } : null);
 
-                setAuthor('');
-                setEmail('');
                 setBody('');
             })
             .catch((err) => {
@@ -87,28 +86,12 @@ const PostItem = () => {
                     <h2 className={styles.commentsTitle}>Оставить комментарий</h2>
 
                     <form className={styles.commentForm} onSubmit={onSubmit}>
-                        <input 
-                            type="text"
-                            placeholder="Ваше имя"
-                            value={author}
-                            name="author"
-                            onChange={(e) => setAuthor(e.target.value)}
-                            required/>
-
-                        <input 
-                            type="text"
-                            placeholder="Ваш email"
-                            value={email}
-                            name="email"
-                            onChange={(e) => setEmail(e.target.value)}
-                            required/>
-
-                        <textarea
+                        <Textarea
                             placeholder="Ваш комментарий"
                             value={body}
                             name="body"
                             onChange={(e) => setBody(e.target.value)}
-                            required></textarea>
+                            required></Textarea>
 
                         <button type="submit">Отправить</button>
                     </form>
@@ -119,7 +102,6 @@ const PostItem = () => {
                 </div>
             )}
             
-
             <h2 className={styles.commentsTitle} style={{ marginTop: "30px" }}>
                 Комментарии
             </h2>

@@ -145,6 +145,30 @@
       "title": "Пост",
       "body": "аа",
       "id": "I8pB_Or3e6w"
+    },
+    {
+      "userId": null,
+      "title": "Пост",
+      "body": "123",
+      "id": "VC7UnFMNWfo"
+    },
+    {
+      "userId": null,
+      "title": "132",
+      "body": "46",
+      "id": "KnMWTY7I1NU"
+    },
+    {
+      "userId": null,
+      "title": "12",
+      "body": "12",
+      "id": "8_lhWkkFxeY"
+    },
+    {
+      "userId": "WN4TjtCEPDU",
+      "title": "123",
+      "body": "45",
+      "id": "lxgoWrg0tig"
     }
   ],
   "comments": [
@@ -203,6 +227,41 @@
       "email": "3",
       "body": "3",
       "id": "turF-tHJruI"
+    },
+    {
+      "postId": "2",
+      "author": "4",
+      "email": "4",
+      "body": "12",
+      "id": "C1_8DgECyyw"
+    },
+    {
+      "postId": "2",
+      "author": "Aaa",
+      "email": "a@a.a",
+      "body": "fdgd",
+      "id": "d1gF8zHk800"
+    },
+    {
+      "postId": "5",
+      "author": "Aaa",
+      "email": "a@a.a",
+      "body": "123",
+      "id": "FMoNSSo9OSs"
+    },
+    {
+      "postId": "4",
+      "author": "Aaa",
+      "email": "a@a.a",
+      "body": "123",
+      "id": "Ghhs4qy40v0"
+    },
+    {
+      "postId": "4",
+      "author": "Aaa",
+      "email": "a@a.a",
+      "body": "5",
+      "id": "9vMofBBdFOY"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

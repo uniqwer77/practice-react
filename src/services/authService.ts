@@ -12,7 +12,7 @@ export interface JwtPayload {
   exp: number;
 }
 
-const API_URL = 'http://localhost:3001';
+const API_URL = import.meta.env.VITE_API_URL;
 
 const base64UrlEncode = (str: string): string => {
   return btoa(unescape(encodeURIComponent(str)))

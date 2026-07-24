@@ -11,6 +11,12 @@
       "email": "1@1.1",
       "password": "123456",
       "id": "MccdPXlpS_I"
+    },
+    {
+      "username": "User",
+      "email": "u@u.u",
+      "password": "123456",
+      "id": "dOcTsSOmLUk"
     }
   ],
   "posts": [
@@ -262,6 +268,13 @@
       "email": "a@a.a",
       "body": "5",
       "id": "9vMofBBdFOY"
+    },
+    {
+      "postId": "2",
+      "author": "User",
+      "email": "u@u.u",
+      "body": "Ком",
+      "id": "i362NfQBKBk"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

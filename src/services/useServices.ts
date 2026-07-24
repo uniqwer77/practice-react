@@ -26,7 +26,7 @@ export type NewCommentData = Omit<Comment, 'id'>;
 const useServices = () => {
     const {loading, request, error, clearError} = useHttp();
 
-    const _apiBase = 'http://localhost:3001';
+    const _apiBase = import.meta.env.VITE_API_URL;
     const _basePage = 1;
 
     const getAllPosts = async (page: number = _basePage): Promise<Post[]> => {
